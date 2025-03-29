@@ -1,0 +1,14 @@
+Bootstrap: docker
+From: ollama/ollama:0.5.1
+
+%post
+    apt-get update && apt-get install -y python3 python3-pip git
+
+    pip3 install https://github.com/cloudmercato/ollama-benchmark/archive/refs/heads/main.zip
+
+%environment
+    export PATH="/usr/local/bin:$PATH"
+
+%runscript
+    exec ollama-benchmark "$@"
+
